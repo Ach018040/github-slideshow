@@ -1,19 +1,9 @@
 import { DashboardChart } from "@/components/dashboard-chart";
 import { MetricCard } from "@/components/metric-card";
-import { mockDashboard } from "@/lib/mock";
-
-async function getDashboard() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/dashboard`, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch dashboard");
-    return res.json();
-  } catch {
-    return mockDashboard;
-  }
-}
+import { getDashboardData } from "@/lib/dashboard";
 
 export default async function HomePage() {
-  const data = await getDashboard();
+  const data = await getDashboardData();
 
   return (
     <div className="space-y-6">
